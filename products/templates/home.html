@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Dark Theme */
+        body {
+            background-color: #1e1e2f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            width: 200px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn.add {
+            background-color: #4CAF50;
+        }
+
+        .btn.search {
+            background-color: #2196F3;
+        }
+
+        .btn:hover {
+            border-color: #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+        <div class="btn-container">
+            <a href="{% url 'add_product' %}" class="btn add">➕ Add Product</a>
+            <a href="{% url 'search_product' %}" class="btn search">🔍 Search Products</a>
+        </div>
+    </div>
+</body>
+</html>
