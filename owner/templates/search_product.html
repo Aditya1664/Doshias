@@ -124,7 +124,13 @@
     </style>
 </head>
 <body>
-
+    <form id="logoutForm" method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" id="logoutButton" class="logout-btn style"
+            style="position: absolute; top: 5%; right: 5%;">
+            <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Logout 
+        </button>
+    </form>
     <h2>Search Products</h2>
 
     <form method="get" class="search-container">
@@ -161,7 +167,7 @@
                             <td>{{ product.discount }}%</td>
                             <td>₹{{ product.final_price }}</td>
                             <td>
-                                <button onclick="openEditModal('{{ product.id }}', '{{ product.company_name }}', '{{ product.part_number }}', '{{ product.car_model }}', '{{ product.description }}')">Edit</button>
+                                <button onclick="openEditModal('{{ product.id }}', '{{ product.company_name }}', '{{ product.part_number }}', '{{ product.car_model }}', '{{ product.description }}', '{{ product.mrp }}', '{{ product.discount }}')">Edit</button>
                                 <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Are you sure?')">
                                     <button style="background-color: red;">Delete</button>
                                 </a>
@@ -218,9 +224,14 @@
         document.getElementById('editProductModal').style.display = 'none';
     }
 
+    function getCSRFToken() {
+        return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    }
+    
     function saveProduct() {
-        let productId = document.getElementById('edit_product_id').value;
+        // let productId = document.getElementById('edit_product_id').value;
         let data = {
+            productId: document.getElementById('edit_product_id').value,
             company_name: document.getElementById('edit_company_name').value,
             part_number: document.getElementById('edit_part_number').value,
             car_model: document.getElementById('edit_car_model').value,
@@ -228,16 +239,19 @@
             mrp: document.getElementById('edit_mrp').value,
             discount: document.getElementById('edit_discount').value
         };
-
-        fetch(`/edit_product/${productId}/`, {
+    
+        fetch(`/o/edit_product/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
+                'X-CSRFToken': getCSRFToken()
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log("Request sent to:", response.url); // Logs the actual request URL
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 alert("Product updated successfully!");
@@ -247,6 +261,7 @@
             }
         });
     }
+    
 </script>
 
 </body>

@@ -13,7 +13,7 @@ from Doshias.settings import EMAIL_HOST_USER
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('userlogin')
 
 def role_based_login(request):
     if request.method == 'POST':
@@ -131,8 +131,6 @@ def signup_view(request):
     return render(request, 'login.html')
 
 
-def login(request):
-    return render(request, 'update.html')
 
 def ForgetPassword(request):
     if request.method == "POST":
@@ -142,14 +140,14 @@ def ForgetPassword(request):
             user=User.objects.get(username=email)
 
             send_mail(
-                "Password Reset Request for Smart Attendance System",
+                "Password Reset Request",
                 f"Dear {user.last_name},\n\n"
-                "We received a request to reset the password for your account associated with the Smart Attendance System. "
+                "We received a request to reset the password for your account associated with our system. "
                 "To reset your password, please click the link below:\n\n"
-                f"https://swdsmartattendancesystem.pythonanywhere.com/auth/newpasswordpage/{user}\n\n"
+                f"https://doshias.pythonanywhere.com/newpasswordpage/{user}\n\n"
                 "If you did not request a password reset, please ignore this email, and no changes will be made to your account.\n\n"
                 "Best regards,\n"
-                "Social Welfare and Development Committee",
+                "Doshi",
                 EMAIL_HOST_USER,
                 [email],
                 fail_silently=True

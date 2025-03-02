@@ -8,9 +8,19 @@ from django.urls import reverse
 from django.conf import settings
 from .forms import ProductForm
 from authentication.models import Product
+from django.contrib import messages
+from django.contrib.auth import logout
 
 @login_required(login_url='userlogin')
 def worker(request):
+    user = request.user
+    # if not user.is_authenticated:
+    #     messages.error(request, 'You are not logged in')
+    #     return redirect('userlogin')
+    if not hasattr(user, 'worker'):
+        messages.error(request, 'You are not a worker. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
     return render(request, 'worker.html')
 
 @login_required(login_url='userlogin')

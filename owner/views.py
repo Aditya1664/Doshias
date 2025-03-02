@@ -11,9 +11,19 @@ from .forms import ProductForm
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.contrib.auth import logout
 
 @login_required(login_url='userlogin')
 def ownerview(request):
+    user = request.user
+    # if not user.is_authenticated:
+    #     messages.error(request, 'You are not logged in')
+    #     return redirect('userlogin')
+    if not hasattr(user, 'owner'):
+        messages.error(request, 'You are not an owner. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
     return render(request, 'owner.html')
 
 @login_required(login_url='userlogin')
@@ -53,27 +63,32 @@ def search_product(request):
         "query_description": query_description,
     })
 
-@login_required(login_url='userlogin')
+
 @csrf_exempt
-def edit_product(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-
+def edit_product(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        product.company_name = data["company_name"]
-        product.part_number = data["part_number"]
-        product.car_model = data["car_model"]
-        product.description = data["description"]
-        product.mrp = data["mrp"]
-        product.discount = data["discount"]
-        product.save()
+        try:
+            data = json.loads(request.body)
+            product_id = data.get('productId')
+            product = get_object_or_404(Product, id=product_id)
+            product.company_name = data.get('company_name', product.company_name)
+            product.part_number = data.get('part_number', product.part_number)
+            product.car_model = data.get('car_model', product.car_model)
+            product.description = data.get('description', product.description)
+            product.mrp = float(data.get('mrp', product.mrp))
+            product.discount = float(data.get('discount', product.discount))
 
-        return JsonResponse({"success": True})
+            product.save()
+            return JsonResponse({"success": True})
+        except json.JSONDecodeError:
+            return JsonResponse({"success": False, "error": "Invalid JSON data"})
 
-    return JsonResponse({"success": False})
+    return JsonResponse({"success": False, "error": "Invalid request method"})
+
 
 @login_required(login_url='userlogin')
 def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     return redirect('search_product')
+

@@ -131,8 +131,8 @@ WORKER_KEY = 'P5T2B6'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'abc@vit.edu'
-EMAIL_HOST_PASSWORD = 'wgvwtstogrdtihml'
+EMAIL_HOST_USER = 'pranav08doshi@gmail.com'
+EMAIL_HOST_PASSWORD = 'ekybinwjzfbuznlm'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 

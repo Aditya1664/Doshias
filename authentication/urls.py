@@ -9,4 +9,5 @@ urlpatterns = [
     path('usersignup/', views.signup_view, name='usersignup'),
     path('ForgetPassword/', views.ForgetPassword, name='forget_password'),
     path('newpasswordpage/<str:user>/', views.NewPasswordPage, name='new_password'),
+    path('logout/',views.logout_view,name='logout')
 ]

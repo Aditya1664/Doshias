@@ -12,7 +12,20 @@
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
 
+        button:hover {
+            background-color: #0056b3;
+        }
         /* Dark Theme */
         body {
             background-color: #1e1e2f;
@@ -69,6 +82,13 @@
     </style>
 </head>
 <body>
+    <form id="logoutForm" method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" id="logoutButton" class="logout-btn style"
+            style="position: absolute; top: 5%; right: 5%;">
+            <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Logout 
+        </button>
+    </form>
     <div class="container">
         <h1>Product Management</h1>
         <div class="btn-container">
