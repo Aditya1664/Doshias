@@ -8,6 +8,9 @@ from django.urls import reverse
 from django.conf import settings
 from authentication.models import Product
 from .forms import ProductForm
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required(login_url='userlogin')
 def ownerview(request):
@@ -31,7 +34,6 @@ def search_product(request):
     query_car_model = request.GET.get("car_model", "")
     query_description = request.GET.get("description", "")
 
-    # Filtering based on multiple fields
     products = Product.objects.all()
     
     if query_company:
@@ -50,3 +52,28 @@ def search_product(request):
         "query_car_model": query_car_model,
         "query_description": query_description,
     })
+
+@login_required(login_url='userlogin')
+@csrf_exempt
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+        product.company_name = data["company_name"]
+        product.part_number = data["part_number"]
+        product.car_model = data["car_model"]
+        product.description = data["description"]
+        product.mrp = data["mrp"]
+        product.discount = data["discount"]
+        product.save()
+
+        return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False})
+
+@login_required(login_url='userlogin')
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    return redirect('search_product')
