@@ -13,10 +13,11 @@ from django.contrib.auth import logout
 
 @login_required(login_url='userlogin')
 def worker(request):
-    user = request.user
+    
     # if not user.is_authenticated:
     #     messages.error(request, 'You are not logged in')
     #     return redirect('userlogin')
+    user = request.user
     if not hasattr(user, 'worker'):
         messages.error(request, 'You are not a worker. We are logging you out.')
         logout(request)
@@ -25,6 +26,12 @@ def worker(request):
 
 @login_required(login_url='userlogin')
 def search_product(request):
+    user = request.user
+    if not hasattr(user, 'worker'):
+        messages.error(request, 'You are not a worker. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
+    
     query_company = request.GET.get("company_name", "")
     query_part = request.GET.get("part_number", "")
     query_car_model = request.GET.get("car_model", "")

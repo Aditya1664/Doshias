@@ -16,10 +16,10 @@ from django.contrib.auth import logout
 
 @login_required(login_url='userlogin')
 def ownerview(request):
-    user = request.user
     # if not user.is_authenticated:
     #     messages.error(request, 'You are not logged in')
-    #     return redirect('userlogin')
+    #     return redirect('userlogin')'
+    user = request.user
     if not hasattr(user, 'owner'):
         messages.error(request, 'You are not an owner. We are logging you out.')
         logout(request)
@@ -28,6 +28,11 @@ def ownerview(request):
 
 @login_required(login_url='userlogin')
 def add_product(request):
+    user = request.user
+    if not hasattr(user, 'owner'):
+        messages.error(request, 'You are not an owner. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
     if request.method == "POST":
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -39,6 +44,11 @@ def add_product(request):
 
 @login_required(login_url='userlogin')
 def search_product(request):
+    user = request.user
+    if not hasattr(user, 'owner'):
+        messages.error(request, 'You are not an owner. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
     query_company = request.GET.get("company_name", "")
     query_part = request.GET.get("part_number", "")
     query_car_model = request.GET.get("car_model", "")
@@ -88,6 +98,11 @@ def edit_product(request):
 
 @login_required(login_url='userlogin')
 def delete_product(request, product_id):
+    user = request.user
+    if not hasattr(user, 'owner'):
+        messages.error(request, 'You are not an owner. We are logging you out.')
+        logout(request)
+        return redirect('userlogin')
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     return redirect('search_product')

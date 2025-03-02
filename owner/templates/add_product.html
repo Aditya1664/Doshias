@@ -139,27 +139,27 @@
         <form method="post">
             {% csrf_token %}
             
-            <label for="id_company_name">Company Name</label>
+            <label for="id_company_name" required>Company Name</label>
             {{ form.company_name }}
 
             <div class="row">
                 <div>
                     <label for="id_part_number">Part Number</label>
-                    {{ form.part_number }}
+                    {{ form.part_number|default:'' }}
                 </div>
                 <div>
                     <label for="id_car_model">Car Model</label>
-                    {{ form.car_model }}
+                    {{ form.car_model|default:'' }}
                 </div>
             </div>
 
             <label for="id_description">Description</label>
-            <input type="text" name="description" id="id_description" value="{{ form.description.value|default:'' }}">
+            <input type="text" name="description" id="id_description" required value="{{ form.description.value|default:'' }}">
 
             <div class="row">
                 <div>
                     <label for="id_mrp">MRP</label>
-                    <input type="number" step="0.01" name="mrp" id="id_mrp" value="{{ form.mrp.value|default:'' }}" oninput="calculateFinalPrice()">
+                    <input type="number" step="0.01" name="mrp" id="id_mrp" required value="{{ form.mrp.value|default:'' }}" oninput="calculateFinalPrice()">
                 </div>
                 <div>
                     <label for="id_discount">Discount (%)</label>

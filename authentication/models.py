@@ -28,8 +28,8 @@ class Owner(models.Model):
 
 class Product(models.Model):
     company_name = models.CharField(max_length=255,default='',blank=False)
-    part_number = models.CharField(max_length=255,default='', blank=True, null=True)
-    car_model = models.CharField(max_length=255,default='', blank=True, null=True)
+    part_number = models.CharField(max_length=255,default='', blank=True)
+    car_model = models.CharField(max_length=255,default='', blank=True)
     description = models.TextField(default='', blank=False, null=True)
     mrp = models.DecimalField(max_digits=10, decimal_places=2,blank=False)
     discount = models.DecimalField(max_digits=5, decimal_places=2,default=0,blank=True)
