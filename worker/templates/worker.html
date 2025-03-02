@@ -13,7 +13,7 @@
             font-family: 'Arial', sans-serif;
         }
         button {
-            background-color: #007bff;
+            background-color: rgb(1, 87, 179);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -28,8 +28,8 @@
         }
         /* Dark Theme */
         body {
-            background-color: #1e1e2f;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: black;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -62,13 +62,13 @@
             border-radius: 8px;
             border: 2px solid transparent;
             transition: all 0.3s ease-in-out;
-            width: 200px;
+            width: 300px;
             text-align: center;
             display: inline-block;
         }
 
         .btn.add {
-            background-color: #4CAF50;
+            background-color: rgb(1, 58, 119);
         }
 
         .btn.search {
@@ -85,7 +85,7 @@
     <form id="logoutForm" method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit" id="logoutButton" class="logout-btn style"
-            style="position: absolute; top: 5%; right: 5%;">
+            style="position: absolute; top: 1%; right: 1%; padding: 5px -5px;">
             <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Logout 
         </button>
     </form>

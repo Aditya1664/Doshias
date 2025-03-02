@@ -27,15 +27,17 @@ class Owner(models.Model):
         ordering = ['oname']
 
 class Product(models.Model):
-    company_name = models.CharField(max_length=255)
-    part_number = models.CharField(max_length=255, unique=True)
-    car_model = models.CharField(max_length=255)
-    description = models.TextField()
-    mrp = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=5, decimal_places=2)
+    company_name = models.CharField(max_length=255,default='',blank=False)
+    part_number = models.CharField(max_length=255,default='', blank=True, null=True)
+    car_model = models.CharField(max_length=255,default='', blank=True, null=True)
+    description = models.TextField(default='', blank=False, null=True)
+    mrp = models.DecimalField(max_digits=10, decimal_places=2,blank=False)
+    discount = models.DecimalField(max_digits=5, decimal_places=2,default=0,blank=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
+        if self.discount is None:
+            self.discount = 0  # Ensure discount is 0 if None
         self.final_price = self.mrp - (self.mrp * self.discount / 100)
         super().save(*args, **kwargs)
 

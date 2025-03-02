@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #c9df8a 0%, #9dbaa9 100%);
+            background:rgb(225, 227, 226);;
             margin: 0;
             padding: 0;
             display: flex;
@@ -30,7 +30,7 @@
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            {% comment %} box-shadow: 0 15px 35px rgb(1, 58, 119); {% endcomment %}
             padding: 40px;
             width: 400px;
             max-width: 90%;
@@ -41,7 +41,7 @@
 
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            {% comment %} box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); {% endcomment %}
         }
 
         @media (max-width: 400px) {
@@ -65,7 +65,7 @@
         }
 
         h2 {
-            color: #234d20;
+            color: rgb(1, 87, 179);
             text-align: center;
             margin-bottom: 30px;
             font-weight: 600;
@@ -77,7 +77,7 @@
             margin-bottom: 30px;
             border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            {% comment %} box-shadow: 0 5px 15px rgb(1, 58, 119); {% endcomment %}
         }
 
         .tab {
@@ -86,13 +86,13 @@
             padding: 15px;
             cursor: pointer;
             background-color: #e0e0e0;
-            color: #234d20;
+            color: rgb(1, 87, 179);
             font-weight: 500;
             transition: all 0.3s ease;
         }
 
         .tab.active {
-            background-color: #234d20;
+            background-color: rgb(1, 87, 179);
             color: white;
         }
 
@@ -125,14 +125,14 @@
 
         .input-group input:focus {
             outline: none;
-            box-shadow: 0 0 0 2px #234d20;
+            box-shadow: 0 0 0 2px rgb(1, 87, 179);
         }
 
         .input-group .icon-left {
             position: absolute;
             left: 20px;
             transform: translateY(-50%);
-            color: #234d20;
+            color: rgb(1, 87, 179);
             font-size: 1.2rem;
         }
 
@@ -149,20 +149,20 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #234d20;
+            color: rgb(1, 87, 179);
             cursor: pointer;
             font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
         .input-group .icon-right:hover {
-            color: #1a3a18;
+            color: rgb(1, 58, 119);
         }
 
         button {
             width: 100%;
             padding: 15px;
-            background-color: #234d20;
+            background-color: rgb(1, 87, 179);
             color: white;
             border: none;
             border-radius: 50px;
@@ -174,8 +174,8 @@
         }
 
         button:hover {
-            background-color: #1a3a18;
-            box-shadow: 0 7px 20px rgba(35, 77, 32, 0.4);
+            background-color: rgb(1, 58, 119);
+            {% comment %} box-shadow: 0 7px 20px rgba(35, 77, 32, 0.4); {% endcomment %}
             transform: translateY(-2px);
         }
 

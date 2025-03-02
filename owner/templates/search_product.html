@@ -36,7 +36,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: rgb(1, 87, 179);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -61,7 +61,7 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgb(1, 58, 119);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -73,7 +73,7 @@
         }
 
         th {
-            background-color: #007bff;
+            background-color: rgb(1, 87, 179);
             color: white;
         }
 
@@ -121,16 +121,26 @@
             font-weight: bold;
             cursor: pointer;
         }
+        input {
+            {% comment %} width: 80%; {% endcomment %}
+            padding: 10px;
+            gap:10px;
+            margin-top:15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
     </style>
 </head>
 <body>
     <form id="logoutForm" method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit" id="logoutButton" class="logout-btn style"
-            style="position: absolute; top: 5%; right: 5%;">
+            style="position: absolute; top: 1%; right: 1%; padding: 5px -5px;">
             <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Logout 
         </button>
     </form>
+    <a href="{% url 'add_product' %}" class="add-product" style="margin-top:20px;">➕ Add Product</a>
     <h2>Search Products</h2>
 
     <form method="get" class="search-container">
@@ -138,7 +148,9 @@
         <input type="text" name="part_number" value="{{ query_part }}" placeholder="Part Number">
         <input type="text" name="car_model" value="{{ query_car_model }}" placeholder="Car Model">
         <input type="text" name="description" value="{{ query_description }}" placeholder="Description">
-        <button type="submit">Search</button>
+        <div style="width: 100%; text-align: center;">
+            <button type="submit">Search</button>
+        </div>
     </form>
 
     {% if products %}
@@ -181,27 +193,27 @@
         <p class="no-products">No products found</p>
     {% endif %}
 
-    <a href="{% url 'add_product' %}" class="add-product">➕ Add Product</a>
+    
     <!-- Edit Product Modal -->
-<div id="editProductModal" class="modal">
+<div id="editProductModal" class="modal" >
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h3>Edit Product</h3>
-        <form id="editProductForm">
+        <form id="editProductForm"> 
             {% csrf_token %}
             <input type="hidden" id="edit_product_id">
             <label>Company Name:</label>
-            <input type="text" id="edit_company_name" required>
+            <input type="text" id="edit_company_name" required><br>
             <label>Part Number:</label>
-            <input type="text" id="edit_part_number" required>
+            <input type="text" id="edit_part_number" ><br>
             <label>Car Model:</label>
-            <input type="text" id="edit_car_model" required>
+            <input type="text" id="edit_car_model"><br>
             <label>Description:</label>
-            <input type="text" id="edit_description" required>
+            <input type="text" id="edit_description" required><br>
             <label>MRP:</label>
-            <input type="number" id="edit_mrp" required>
+            <input type="number" id="edit_mrp" required><br>
             <label>Discount (%):</label>
-            <input type="number" id="edit_discount" required>
+            <input type="number" id="edit_discount"><br><br>
             <button type="button" onclick="saveProduct()">Save Changes</button>
         </form>
     </div>
