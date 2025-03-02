@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products',
+    'owner',
+    'worker',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+OWNER_KEY = 'F3N1X7'
+WORKER_KEY = 'P5T2B6'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'abc@vit.edu'
+EMAIL_HOST_PASSWORD = 'wgvwtstogrdtihml'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+# SESSION_EXPIRE_SECONDS = 600
+# SESSION_TIMEOUT_REDIRECT = 'https://swdsmartattendancesystem.pythonanywhere.com/auth/'

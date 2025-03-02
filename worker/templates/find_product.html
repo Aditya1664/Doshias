@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Search Form Styling */
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Table Styling */
+        .table-container {
+            margin: 20px auto;
+            width: 90%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* No Products Found */
+        .no-products {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Add Product Link */
+        .add-product {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #007bff;
+            font-size: 18px;
+        }
+
+        .add-product:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Search Products</h2>
+
+    <!-- Search Form -->
+    <form method="get" class="search-container">
+        <input type="text" name="company_name" value="{{ query_company }}" placeholder="Company Name">
+        <input type="text" name="part_number" value="{{ query_part }}" placeholder="Part Number">
+        <input type="text" name="car_model" value="{{ query_car_model }}" placeholder="Car Model">
+        <input type="text" name="description" value="{{ query_description }}" placeholder="Description">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if products %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Part Number</th>
+                        <th>Car Model</th>
+                        <th>Description</th>
+                        <th>MRP</th>
+                        <th>Discount (%)</th>
+                        <th>Final Price (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.company_name }}</td>
+                            <td>{{ product.part_number }}</td>
+                            <td>{{ product.car_model }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>₹{{ product.mrp }}</td>
+                            <td>{{ product.discount }}%</td>
+                            <td>₹{{ product.final_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="no-products">No products found</p>
+    {% endif %}
+
+
+</body>
+</html>
