@@ -125,8 +125,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-OWNER_KEY = 'F3N1X7'
-WORKER_KEY = 'P5T2B6'
+OWNER_KEY = 'Owner'
+WORKER_KEY = 'Worker'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

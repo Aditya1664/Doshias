@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
-def profile_picture_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
-    new_filename = f"{instance.user.first_name}_{instance.user.username}_{instance.prn}.{ext}"
-    return os.path.join('profile_pictures', new_filename)
 
 class Worker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
