@@ -165,7 +165,10 @@
                         <th>MRP</th>
                         <th>Discount (%)</th>
                         <th>Final Price (₹)</th>
+                        <th>Customer Price (₹)</th>
+                        <th>Mechanic Price (₹)</th> 
                         <th>Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -178,12 +181,16 @@
                             <td>₹{{ product.mrp }}</td>
                             <td>{{ product.discount }}%</td>
                             <td>₹{{ product.final_price }}</td>
-                            <td>
-                                <button onclick="openEditModal('{{ product.id }}', '{{ product.company_name }}', '{{ product.part_number }}', '{{ product.car_model }}', '{{ product.description }}', '{{ product.mrp }}', '{{ product.discount }}')">Edit</button>
+                            <td>₹{{ product.c_price }}</td>
+                            <td>₹{{ product.m_price }}</td>
+                        
+                            <td style="display: flex; justify-content: space-evenly; align-items: center;gap:10px">
+                                <button onclick="openEditModal('{{ product.id }}', '{{ product.company_name }}', '{{ product.part_number }}', '{{ product.car_model }}', '{{ product.description }}', '{{ product.mrp }}', '{{ product.discount }}', '{{ product.c_price }}', '{{ product.m_price }}')">✏️</button>
                                 <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Are you sure?')">
-                                    <button style="background-color: red;">Delete</button>
+                                    <button style="background-color: red;">🗑️</button>
                                 </a>
                             </td>
+                            
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -213,14 +220,18 @@
             <label>MRP:</label>
             <input type="number" id="edit_mrp" required><br>
             <label>Discount (%):</label>
-            <input type="number" id="edit_discount"><br><br>
+            <input type="number" id="edit_discount"><br>
+            <label>Customer Price (%):</label>
+            <input type="number" id="edit_c_price" required><br>
+            <label>Mechanic Price (%):</label>
+            <input type="number" id="edit_m_price" required><br><br>
             <button type="button" onclick="saveProduct()">Save Changes</button>
         </form>
     </div>
 </div>
 
 <script>
-    function openEditModal(id, company_name, part_number, car_model, description, mrp, discount) {
+    function openEditModal(id, company_name, part_number, car_model, description, mrp, discount, c_price, m_price) {
         document.getElementById('edit_product_id').value = id;
         document.getElementById('edit_company_name').value = company_name;
         document.getElementById('edit_part_number').value = part_number;
@@ -228,7 +239,8 @@
         document.getElementById('edit_description').value = description;
         document.getElementById('edit_mrp').value = mrp;
         document.getElementById('edit_discount').value = discount;
-
+        document.getElementById('edit_c_price').value = c_price;
+        document.getElementById('edit_m_price').value = m_price
         document.getElementById('editProductModal').style.display = 'flex';
     }
 
@@ -249,7 +261,9 @@
             car_model: document.getElementById('edit_car_model').value,
             description: document.getElementById('edit_description').value,
             mrp: document.getElementById('edit_mrp').value,
-            discount: document.getElementById('edit_discount').value
+            discount: document.getElementById('edit_discount').value,
+            c_price: document.getElementById('edit_c_price').value,
+            m_price: document.getElementById('edit_m_price').value,
         };
     
         fetch(`/o/edit_product/`, {

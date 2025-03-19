@@ -34,6 +34,8 @@ class Product(models.Model):
     mrp = models.DecimalField(max_digits=10, decimal_places=2,blank=False)
     discount = models.DecimalField(max_digits=5, decimal_places=2,default=0,blank=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    c_price = models.DecimalField(max_digits=5, decimal_places=2,default=0,blank=True)
+    m_price = models.DecimalField(max_digits=5, decimal_places=2,default=0,blank=True)
 
     def save(self, *args, **kwargs):
         if self.discount is None:

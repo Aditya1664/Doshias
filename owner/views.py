@@ -87,6 +87,8 @@ def edit_product(request):
             product.description = data.get('description', product.description)
             product.mrp = float(data.get('mrp', product.mrp))
             product.discount = float(data.get('discount', product.discount))
+            product.c_price = float(data.get('c_price', product.c_price))
+            product.m_price = float(data.get('m_price', product.m_price))
 
             product.save()
             return JsonResponse({"success": True})

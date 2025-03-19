@@ -170,6 +170,17 @@
             <label for="id_final_price">Final Price</label>
             <input type="number" step="0.01" name="final_price" id="id_final_price" value="{{ form.final_price.value|default:'' }}" readonly>
 
+            <div class="row">
+                <div>
+                    <label for="id_c_pricec">Customer Price</label>
+                    <input type="number" step="0.01" name="c_price" id="id_c_price" required value="{{ form.c_price.value|default:'' }}">
+                </div>
+                <div>
+                    <label for="id_m_price">Mechanic Price</label>
+                    <input type="number" step="0.01" name="m_price" id="id_m_price" required value="{{ form.m_price.value|default:'' }}">
+                </div>
+            </div>
+
             <button type="submit" class="submit-btn">Submit</button>
         </form>
 
